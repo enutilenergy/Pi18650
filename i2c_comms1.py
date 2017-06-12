@@ -1,7 +1,8 @@
 import smbus
 import time
 from smbus import SMBus	
-
+import os
+import sys
 
 DEVICE_BUS = 1 #device bus number
 DEVICE_ADDR = 0x64
