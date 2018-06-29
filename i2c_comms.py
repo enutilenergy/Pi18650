@@ -117,9 +117,9 @@ class i2cCommand:
 		temp_msb = float(0.0)
 		temp_lsb = float(0.0)
 
-		all_regs = bus.read_i2c_block_data(FUELGUAGE_ADDR, FUELGUAGE_REG_ADDR_08, 16)
+		all_regs = bus.read_i2c_block_data(FUELGUAGE_ADDR, FUELGUAGE_REG_ADDR_00, 16)
 		status, control, acc_msb, acc_lsb, chrgthhi_msb, chrgethhi_lsb, chrgthlow_msb, chrgthlow_lsb, voltage_msb, voltage_lsb, voltth_msb, voltth_lsb, temp_msb, temp_lsb, tempth_msb, tempth_lsb = all_regs
-		#print "all regs1: ", all_regs 
+		print "all regs1: ", all_regs 
 
 		
 		#(voltage_reg_I_J) = bus.read_i2c_block_data(FUELGUAGE_ADDR, FUELGUAGE_REG_ADDR_08, 2)
