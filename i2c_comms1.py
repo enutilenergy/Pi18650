@@ -267,11 +267,6 @@ class i2cCommand:
 
 
 
-
-		
-
-
-testpoll = i2cCommand()
  
 testpoll.set_fuelguage_control_reg(0xC0, 0x80, 0x10, 0x00)
 
@@ -284,6 +279,7 @@ while 1:
 	#print "Battery Voltage: ", battery_voltage
 	time.sleep(1.5)
 	print "-------------------------------------------------------------------------"
+
 
 
 		 	
