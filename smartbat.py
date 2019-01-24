@@ -35,13 +35,22 @@ class i2c:
       var_list = map(ord,ms)
       #print("bat_list: ", bat_list)
       var_int = var_list[0]*256 + var_list[1]
+
+      return var_int
+
+   def get_single_int(self, var_slice):
+       
+      ms = memoryview(var_slice)
+      var_list = map(ord,ms)
+      #print("bat_list: ", bat_list)
+      var_int = var_list[0]
       
       return var_int
 
 
 
 testpoll = i2c(0x48,1)
-samples = 10
+samples = 5
 bat_avg = 0
 hum_avg = 0
 temp_avg = 0
@@ -54,10 +63,17 @@ for i in range(samples):
       bat = result[:2]
       hum = result[2:4]
       temp = result[4:6]
-      temp1 = result[6:8]
-      temp2 = result[-2:]
+      mode = result[6:7]
+      reboot = result[7:8]
+      pwrlvl = result[8:9]
+      temp2 = result[-1:]
 
-      for j in range(3):
+      #print("bat: ", bat)
+      #print("hum: ", hum)
+      #print("temp: ", temp)
+
+
+      for j in range(6):
           if j == 0:
              res = testpoll.get_int(bat)
              bat_avg = bat_avg + res
@@ -70,12 +86,23 @@ for i in range(samples):
              res2 = testpoll.get_int(temp)
              temp_avg  = temp_avg + res2
 
+          if j == 3:
+             mode_res = testpoll.get_single_int(mode)
+
+          if j == 4:
+             reboot_res = testpoll.get_single_int(reboot)
+
+          if j == 5:
+             pwrlvl_res = testpoll.get_single_int(pwrlvl)
+             
+
+
       result = '0'
       res = 0
       res1 = 0
       res2 = 0
       time.sleep(sample_delay)
-
+4
 #m = memoryview(bat)
 #bat_list = map(ord,m)
 #print("bat_list: ", bat_list)
@@ -129,6 +156,26 @@ temperatureF = float(-88.375) + (float(393.75) * (float(temp_avg_int) / float(10
 temperatureF = round(temperatureF,2)
 print"Temperature: ", temperatureF ,"F"
 #-----------------------------------------
+
+#mode = mode.strip()
+#reboot = reboot.strip()
+#mode = mode.replace('\\', ' ')
+#reboot = reboot.replace('\\', ' ')
+
+
+
+if mode_res == 0:
+      print"Mode: Battery(", mode_res, ")"
+else:
+      print"Mode: UPS(", mode_res, ")"
+
+reboot_res = reboot_res >> 4
+print"Reboot Status: ", reboot_res
+
+pwrlvl_res = pwrlvl_res >> 5
+print"Supply Power Level Status: ", pwrlvl_res
+
+
 
 #dev.write("\x2D\x00") # POWER_CTL reset
 
