@@ -48,7 +48,9 @@ class i2c:
       return var_int
 
 
-
+#<<----------------------------------------------------------------------------------------
+#comment out this section below if you would like to import the class into your own program
+#---------------------------------------------------------------------------------------->>
 testpoll = i2c(0x48,1)
 samples = 5
 bat_avg = 0
@@ -78,23 +80,26 @@ for i in range(samples):
              res = testpoll.get_int(bat)
              bat_avg = bat_avg + res
 
-          if j == 1:
+          elif j == 1:
              res1 = testpoll.get_int(hum)
              hum_avg  = hum_avg + res1
 
-          if j == 2:
+          elif j == 2:
              res2 = testpoll.get_int(temp)
              temp_avg  = temp_avg + res2
 
-          if j == 3:
+          elif j == 3:
              mode_res = testpoll.get_single_int(mode)
 
-          if j == 4:
+          elif j == 4:
              reboot_res = testpoll.get_single_int(reboot)
 
-          if j == 5:
+          elif j == 5:
              pwrlvl_res = testpoll.get_single_int(pwrlvl)
-             
+          else:
+             no_op = ""
+
+
 
 
       result = '0'
@@ -102,7 +107,7 @@ for i in range(samples):
       res1 = 0
       res2 = 0
       time.sleep(sample_delay)
-4
+
 #m = memoryview(bat)
 #bat_list = map(ord,m)
 #print("bat_list: ", bat_list)
