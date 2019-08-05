@@ -19,3 +19,7 @@ which can be modified to add more resolution in the readings. The battery capaci
 linear but close enough to provide a good measurement on the status.  
 
 
+
+The Pi18650 SMART UPS and WROOM32 DONGLE files can be found in the Pi18650_SMART_UPS folder. 
+
+
