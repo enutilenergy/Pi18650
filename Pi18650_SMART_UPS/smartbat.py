@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+#-----------------------------------------------------------------------------------------------
+# This python code is 
+
 import io
 import fcntl
 import struct
@@ -119,6 +122,8 @@ for i in range(samples):
 bat_avg_int = bat_avg / samples
 battery = (float(bat_avg_int) * 0.00322) / 0.7674
 print "Battery: ", battery ,"V"
+
+
 #----------------------------------------
 
 #m1 = memoryview(hum)
